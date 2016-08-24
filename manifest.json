@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+
+    "name": "Gmail Unread Badge",
+    "description": "Adds a badge to the Gmail favicon showing the number of unread emails in your inbox",
+    "version": "0.1",
+
+    "browser_action": {
+        "default_icon": "icon-19.png",
+        "default_popup": "settings.html"
+    },
+    
+    "permissions": ["activeTab"]
+}
