@@ -1,3 +1,9 @@
+//Content Script
+
+"use strict";
+
+var currentInbox = -1; 
+
 function setListenerForNewEmails() {
     var els = document.getElementsByClassName("TK");
     var inbox = els[0];
@@ -26,12 +32,29 @@ function setListenerForNewEmails() {
                     value: mutation.target.textContent,
                     oldValue: mutation.oldValue
                 };
-                console.log('Recording mutation:', entry);
+                //console.log('Recording mutation:', entry);
+                var newInbox = getInbox();
+                console.log(newInbox+" emails in your inbox");
+                if(newInbox > currentInbox){
+                    console.log("You got mail!");
+                    currentInbox = newInbox;
+                }
             });
         });
 
         observer.observe(inbox, config);
     }
 }
+
+function getInbox(){
+    var inbox = document.querySelectorAll("a[href='https://mail.google.com/mail/u/0/#inbox']")[0].textContent;
+    var openBracket = inbox.indexOf("(");
+    var closeBracket = inbox.indexOf(")");
+    if ((openBracket !== -1) && (closeBracket !== -1) && (closeBracket > openBracket)){
+        return inbox.substring(openBracket+1, closeBracket);
+    }
+    else return 0;
+}
+
 console.log("hello from the extension");
 setListenerForNewEmails();
