@@ -14,6 +14,9 @@ function setListenerForNewEmails() {
         return;
     }
     else {
+        currentInbox = getInbox();
+        setFaviconBadge(currentInbox);
+        
         //Config object for the observer
         var config = {
             attributes: true, 
@@ -35,9 +38,12 @@ function setListenerForNewEmails() {
                 //console.log('Recording mutation:', entry);
                 var newInbox = getInbox();
                 console.log(newInbox+" emails in your inbox");
-                if(newInbox > currentInbox){
-                    console.log("You got mail!");
+                if(newInbox !== currentInbox){
+                    if(newInbox > currentInbox){
+                        console.log("You got mail!");
+                    }
                     currentInbox = newInbox;
+                    setFaviconBadge(currentInbox);
                 }
             });
         });
@@ -54,6 +60,13 @@ function getInbox(){
         return inbox.substring(openBracket+1, closeBracket);
     }
     else return 0;
+}
+
+function setFaviconBadge(inbox){
+    var favicon=new Favico({
+        animation:'popFade'
+    });
+    favicon.badge(inbox);
 }
 
 console.log("hello from the extension");

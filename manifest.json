@@ -13,7 +13,7 @@
     "content_scripts": [
         {
         "matches": ["https://mail.google.com/mail/u/0/*"],
-        "js": ["inboxListener.js"]
+        "js": ["favico.js","inboxListener.js"]
         }
     ],
 
