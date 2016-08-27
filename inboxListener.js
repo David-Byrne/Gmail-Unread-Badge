@@ -3,6 +3,7 @@
 "use strict";
 
 var currentInbox = -1; 
+var favicon;
 
 function setListenerForNewEmails() {
     var els = document.getElementsByClassName("TK");
@@ -14,6 +15,10 @@ function setListenerForNewEmails() {
         return;
     }
     else {
+        //initialise the favicon badge
+        favicon=new Favico({
+            animation:'popFade'
+        });
         currentInbox = getInbox();
         setFaviconBadge(currentInbox);
         
@@ -29,13 +34,7 @@ function setListenerForNewEmails() {
 
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
-                var entry = {
-                    mutation: mutation,
-                    el: mutation.target,
-                    value: mutation.target.textContent,
-                    oldValue: mutation.oldValue
-                };
-                //console.log('Recording mutation:', entry);
+
                 var newInbox = getInbox();
                 console.log(newInbox+" emails in your inbox");
                 if(newInbox !== currentInbox){
@@ -63,9 +62,6 @@ function getInbox(){
 }
 
 function setFaviconBadge(inbox){
-    var favicon=new Favico({
-        animation:'popFade'
-    });
     favicon.badge(inbox);
 }
 
