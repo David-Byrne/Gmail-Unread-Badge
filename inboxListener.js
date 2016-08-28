@@ -20,7 +20,7 @@ function setListenerForNewEmails() {
             animation:'popFade'
         });
         currentInbox = getInbox();
-        setFaviconBadge(currentInbox);
+        setBadge(currentInbox);
         
         //Config object for the observer
         var config = {
@@ -61,8 +61,15 @@ function getInbox(){
     else return 0;
 }
 
-function setFaviconBadge(inbox){
+function setBadge(inbox){
     favicon.badge(inbox);
+    sendInboxToBackground(currentInbox);
+}
+
+function sendInboxToBackground(unread){
+    chrome.runtime.sendMessage({inbox: unread}, function(response) {
+        console.log(response);
+    });
 }
 
 console.log("hello from the extension");
