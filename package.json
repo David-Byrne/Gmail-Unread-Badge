@@ -1,0 +1,30 @@
+{
+  "name": "gmail-unread-badge",
+  "version": "0.1.0",
+  "description": "A Chrome extension to add a badge to the Gmail favicon showing the number of unread emails in your inbox",
+  "dependencies": {
+    "favico.js": "^0.3.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Byrne/Gmail-Unread-Badge.git"
+  },
+  "keywords": [
+    "Gmail",
+    "Unread",
+    "Badge",
+    "Favicon",
+    "Chrome",
+    "Extension"
+  ],
+  "author": "David Byrne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/David-Byrne/Gmail-Unread-Badge/issues"
+  },
+  "homepage": "https://github.com/David-Byrne/Gmail-Unread-Badge#readme"
+}
