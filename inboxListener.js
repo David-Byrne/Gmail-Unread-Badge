@@ -40,9 +40,10 @@ function setListenerForNewEmails() {
                 if(newInbox !== currentInbox){
                     if(newInbox > currentInbox){
                         console.log("You got mail!");
+                        playSound()
                     }
                     currentInbox = newInbox;
-                    setFaviconBadge(currentInbox);
+                    setBadge(currentInbox);
                 }
             });
         });
@@ -68,6 +69,12 @@ function setBadge(inbox){
 
 function sendInboxToBackground(unread){
     chrome.runtime.sendMessage({inbox: unread}, function(response) {
+        console.log(response);
+    });
+}
+
+function playSound(){
+    chrome.runtime.sendMessage({sound: true}, function(response) {
         console.log(response);
     });
 }
