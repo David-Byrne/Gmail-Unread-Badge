@@ -99,6 +99,16 @@ function setUp(){
     initFavicon();
     initInbox();
     setListenerForNewEmails();
+    
+    chrome.runtime.sendMessage({open: true}, function(response) {
+        console.log(response);
+    });
+
+    window.addEventListener("beforeunload", function(){
+        chrome.runtime.sendMessage({open: false}, function(response) {
+            console.log(response);
+        });
+    });
 }
 
 console.log("hello from the extension");
