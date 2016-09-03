@@ -33,7 +33,7 @@ function changeIcon(tabsOpen){
         file="icon-19.png";
     }
     else{
-        file="icon-closed.png";
+        file="icon-off.png";
         updateExtensionBadge("");//change the badge to blank as extension is no longer active
     }
     chrome.browserAction.setIcon({
