@@ -15,13 +15,7 @@ function setListenerForNewEmails() {
         return;
     }
     else {
-        //initialise the favicon badge
-        favicon=new Favico({
-            animation:'popFade'
-        });
-        currentInbox = getInbox();
-        setBadge(currentInbox);
-        
+
         //Config object for the observer
         var config = {
             attributes: true, 
@@ -52,8 +46,30 @@ function setListenerForNewEmails() {
     }
 }
 
+function initInbox(){
+    var inbox = getInbox();
+    if(inbox === -1){
+        setTimeout(initInbox, 200);
+    }
+    else {
+        currentInbox = inbox;
+        setBadge(currentInbox);
+    }
+}
+
+function initFavicon(){
+    favicon=new Favico({
+        animation:'popFade'
+    });
+}
+
 function getInbox(){
-    var inbox = document.querySelectorAll("a[href='https://mail.google.com/mail/u/0/#inbox']")[0].textContent;
+    try {
+        var inbox = document.querySelectorAll("a[href='https://mail.google.com/mail/u/0/#inbox']")[0].textContent;
+    } catch (error) {//in case the dom element hasn't loaded yet.
+        console.log("error: "+error);
+        return -1;
+    }
     var openBracket = inbox.indexOf("(");
     var closeBracket = inbox.indexOf(")");
     if ((openBracket !== -1) && (closeBracket !== -1) && (closeBracket > openBracket)){
@@ -79,5 +95,11 @@ function playSound(){
     });
 }
 
+function setUp(){
+    initFavicon();
+    initInbox();
+    setListenerForNewEmails();
+}
+
 console.log("hello from the extension");
-setListenerForNewEmails();
+setUp();
