@@ -105,6 +105,7 @@ function setUp(){
     });
 
     window.addEventListener("beforeunload", function(){
+        setBadge(0);
         chrome.runtime.sendMessage({open: false}, function(response) {
             console.log(response);
         });
