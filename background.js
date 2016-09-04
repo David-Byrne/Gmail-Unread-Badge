@@ -19,6 +19,7 @@ function setOpenTabs(open){
         if (open === true) open = obj.tabsOpen + 1;
         else if (open === false) open = obj.tabsOpen - 1;
         //else it must already be a number, ie. the number of tabs open
+        if (open < 0) open = 0;//stop it from accidentally going negative somewhere.
 
         chrome.storage.local.set({'tabsOpen': open}, function() {
             changeIcon(open);
